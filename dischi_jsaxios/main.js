@@ -1,18 +1,48 @@
 const app = new Vue({
-    el: '#app',
+    el: "#app",
     data: {
         albums: [],
+        authorsList: [],
+        selectValue: "All",
+        dataURL: "http://localhost/php_dischi/dischi_jsaxios/database/database.php",
     },
     created() {
-        // Get data
-        const dataURL = 'http://localhost/php_dischi/dischi_jsaxios/database/database.php';
+        this.getFirstData();
+    },
+    methods: {
+        getFirstData() {
+            // Get data
+            axios
+                .get(this.dataURL, {
+                    params: {
+                        query: "",
+                    },
+                })
+                .then((res) => {
+                    this.albums = res.data.full_list;
+                    this.authorsList = res.data.authors;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
 
-        axios.get(dataURL)
-            .then(res => {
-                this.albums = res.data;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        filteredAlbum() {
+            console.log(this.selectValue);
+
+            // Get filtered data
+            axios
+                .get(this.dataURL, {
+                    params: {
+                        query: this.selectValue,
+                    },
+                })
+                .then((res) => {
+                    this.albums = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
 });

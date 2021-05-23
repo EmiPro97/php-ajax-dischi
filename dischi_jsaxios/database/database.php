@@ -45,6 +45,34 @@
         ]
     ];
 
+    $authors = [];
+    foreach ($database as $author) {
+        if (!in_array($author['author'], $authors)) {
+            array_push($authors, $author['author']);
+        }
+    }
+    
+    $query = $_GET['query'];
+
+    function filter_array($array,$term){
+        $matches = array();
+        foreach($array as $a){
+            if($a['author'] == $term)
+                $matches[]=$a;
+        }
+        return $matches;
+    }
+    
+    if ($query == '') {
+        $database = ['full_list' => $database, 'authors' => $authors];
+    }else if ($query == 'All'){
+        $database = $database;
+    }else{
+        $database = filter_array($database, $query);
+    }
+    
+
+
     // Content type
     header('Content-Type: application/json');
 

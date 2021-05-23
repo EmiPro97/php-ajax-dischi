@@ -1,56 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="../img/favicon.ico">
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../img/favicon.ico" />
 
-    <!-- Main css link -->
-    <link rel="stylesheet" href="../css/style.css">
+        <!-- Main css link -->
+        <link rel="stylesheet" href="../css/style.css" />
 
-    <!-- VueJS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+        <!-- VueJS -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
-    <!-- Window title -->
-    <title>DischiAxios</title>
-</head>
-<body>
-    <div id="app">
-        
-        <!-- HEADER -->
-        <header>
-            <div class="container">
-                <div class="logo-wrap">
-                    <a href="#">
-                        <img src="../img/logo.png" alt="page-logo">
-                    </a>
-                </div>
-            </div>
-        </header>
-
-        <!-- MAIN -->
-        <main>
-            <section class="cards container flex-wrap justify-center">
-                <div v-for="album in albums" class="row">
-                    <div class="card flex-column align-center">
-                        <div class="img-wrap">
-                            <img :src="album.poster" alt="album-img">
-                        </div>
-                        <h2 class="album-title">{{album.title}}</h2>
-                        <div class="album-author">{{album.author}}</div>
-                        <div class="album-date"><strong>{{album.year}}</strong></div>
-                        <div class="album-genre">{{album.genre}}</div>
+        <!-- Window title -->
+        <title>DischiAxios</title>
+    </head>
+    <body>
+        <div id="app">
+            <!-- HEADER -->
+            <header>
+                <div class="container">
+                    <div class="logo-wrap">
+                        <a href="#">
+                            <img src="../img/logo.png" alt="page-logo" />
+                        </a>
                     </div>
                 </div>
-            </section>
-        </main>
-    </div>
+            </header>
 
-    <!-- JS-Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./main.js"></script>
-</body>
+            <!-- MAIN -->
+            <main>
+                <section class="search-bar">
+                    <label for="authors">Search by authors: </label>
+                    <select
+                        @change="filteredAlbum"
+                        v-model="selectValue"
+                        name="authors"
+                        id="authors"
+                    >
+                        <option value="All">All</option>
+                        <option v-for="author in authorsList" :value="author">
+                            {{author}}
+                        </option>
+                    </select>
+                </section>
+                <section class="cards container flex-wrap justify-center">
+                    <div v-for="album in albums" class="row">
+                        <div class="card flex-column align-center">
+                            <div class="img-wrap">
+                                <img :src="album.poster" alt="album-img" />
+                            </div>
+                            <h2 class="album-title">{{album.title}}</h2>
+                            <div class="album-author">{{album.author}}</div>
+                            <div class="album-date">
+                                <strong>{{album.year}}</strong>
+                            </div>
+                            <div class="album-genre">{{album.genre}}</div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- JS-Axios -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./main.js"></script>
+    </body>
 </html>
