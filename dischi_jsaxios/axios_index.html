@@ -32,19 +32,27 @@
 
             <!-- MAIN -->
             <main>
-                <section class="search-bar">
+                <section class="select-wrapper">
                     <label for="authors">Search by authors: </label>
-                    <select
-                        @change="filteredAlbum"
-                        v-model="selectValue"
-                        name="authors"
-                        id="authors"
-                    >
-                        <option value="All">All</option>
-                        <option v-for="author in authorsList" :value="author">
-                            {{author}}
-                        </option>
-                    </select>
+                    <div class="fake-select">
+                        <select
+                            @change="filteredAlbum"
+                            v-model="selectValue"
+                            @click="openedSelect = !openedSelect"
+                            name="authors"
+                            id="select-authors"
+                        >
+                            <option value="All">All</option>
+                            <option
+                                v-for="(author,index) in authorsList"
+                                :key="index"
+                                :value="author"
+                            >
+                                {{author}}
+                            </option>
+                        </select>
+                    </div>
+                    <div :class="!openedSelect ? 'clip' : 'clip closed-clip'"></div>
                 </section>
                 <section class="cards container flex-wrap justify-center">
                     <div v-for="album in albums" class="row">

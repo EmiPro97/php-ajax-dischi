@@ -4,6 +4,7 @@ const app = new Vue({
         albums: [],
         authorsList: [],
         selectValue: "All",
+        openedSelect: false,
         dataURL: "http://localhost/php_dischi/dischi_jsaxios/database/database.php",
     },
     created() {
