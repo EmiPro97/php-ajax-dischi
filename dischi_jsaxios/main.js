@@ -16,7 +16,7 @@ const app = new Vue({
             axios
                 .get(this.dataURL, {
                     params: {
-                        query: "",
+                        query: this.selectValue,
                     },
                 })
                 .then((res) => {
@@ -28,22 +28,22 @@ const app = new Vue({
                 });
         },
 
-        filteredAlbum() {
-            console.log(this.selectValue);
+        // filteredAlbum() {
+        //     console.log(this.selectValue);
 
-            // Get filtered data
-            axios
-                .get(this.dataURL, {
-                    params: {
-                        query: this.selectValue,
-                    },
-                })
-                .then((res) => {
-                    this.albums = res.data;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
+        //     // Get filtered data
+        //     axios
+        //         .get(this.dataURL, {
+        //             params: {
+        //                 query: this.selectValue,
+        //             },
+        //         })
+        //         .then((res) => {
+        //             this.albums = res.data;
+        //         })
+        //         .catch((err) => {
+        //             console.log(err);
+        //         });
+        // },
     },
 });

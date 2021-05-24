@@ -63,12 +63,11 @@
         return $matches;
     }
     
-    if ($query == '') {
+    
+    if ($query == 'All'){
         $database = ['full_list' => $database, 'authors' => $authors];
-    }else if ($query == 'All'){
-        $database = $database;
     }else{
-        $database = filter_array($database, $query);
+        $database = ['full_list' => filter_array($database, $query), 'authors' => $authors];
     }
     
 
